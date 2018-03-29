@@ -1,0 +1,23 @@
+{
+  "name": "chat_api_server",
+  "version": "1.0.0",
+  "description": "PrinciPALS CBus Hack API server. Handles authentication and CRUD.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/theprincipals/chat_api_server.git"
+  },
+  "keywords": [
+    "api",
+    "server"
+  ],
+  "author": "Ryan Ziegler Ishika Majumder Richard Tang Safa Darwish",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/theprincipals/chat_api_server/issues"
+  },
+  "homepage": "https://github.com/theprincipals/chat_api_server#readme"
+}
