@@ -21,7 +21,9 @@
   },
   "homepage": "https://github.com/theprincipals/chat_api_server#readme",
   "dependencies": {
+    "bookshelf": "^0.13.3",
     "hapi": "^17.2.3",
+    "knex": "^0.14.4",
     "npm": "^5.8.0"
   }
 }
