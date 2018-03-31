@@ -74,4 +74,29 @@ module.exports = {
     });
   },
 
+  /**
+   * Searches for topics that meet the requirements in the URL (see index.js)
+   */
+  find: function(req, h) {
+    return new Promise(async (resolve) => {
+      try {
+        param = req.params.param;
+        value = req.params.val;
+        console.log("the val is " + value);
+        result = await Topic.query({
+                  where: {
+                    [param]: value
+                  }
+                }).fetch();
+        if(result !== null) {
+          resolve(h.response("{topics: " + JSON.parse(JSON.stringify(result)) + "}").code(200));
+        } else {
+          resolve(h.response({"statusCode":404,"error":"Not Found","message":"Topic not found"}).code(404));
+        }
+      } catch (err) {
+        resolve(h.response({statusCode: 500, error: "Internal server error121"}).code(500));
+      }
+    });
+  }
+
 }
