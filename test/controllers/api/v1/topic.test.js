@@ -13,7 +13,7 @@ const sinon = require("sinon");
 require("sinon-as-promised");
 const Topic = require("../../../../models/topic");
 
-lab.experiment("GET /device", () => {
+lab.experiment("GET /topic", () => {
   lab.beforeEach(() => {
     sandbox = sinon.sandbox.create();
   });
@@ -24,13 +24,13 @@ lab.experiment("GET /device", () => {
 
   lab.test("returns a 200 OK", async () => {
     res = await server.inject({
-      url: "/device",
+      url: "/topic",
       method: "GET"
     });
     expect(res.statusCode).to.equal(200);
   });
 
-  lab.test("returns an array of devices", async () => {
+  lab.test("returns an array of topic", async () => {
     sandbox.stub(Topic.prototype, "fetchAll").resolves([new Topic({
       id: 0,
       name: "Ryan Is Awesome",
@@ -43,7 +43,7 @@ lab.experiment("GET /device", () => {
       underReview: false
     })]);
     res = await server.inject({
-      url: "/device",
+      url: "/topic",
       method: "GET"
     });
     expect(res.result).to.deep.equal({
