@@ -45,7 +45,9 @@ module.exports = {
       }
     });
   },
-
+  /*
+   * Updates the topic with the provided ID with the provided parameters
+  */
   update: function(req, h) {
     return new Promise(async function(resolve) {
       try {
