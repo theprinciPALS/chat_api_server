@@ -56,6 +56,20 @@ module.exports = {
         console.log("err updating: " + err);
       }
     });
-  }
+  },
+
+  /**
+   * Deletes the topic with the provided ID
+   */
+  delete: function(req, h) {
+    return new Promise(async function(resolve) {
+      try {
+        dev = await new Topic({id: req.params.id}).destroy();
+        resolve(h.response(JSON.parse(JSON.stringify(dev))).code(204));
+      } catch (err) {
+        resolve(h.response({statusCode: 404, error: "Not Found", message: "Topic not found"}).code(404));
+      }
+    });
+  },
 
 }
