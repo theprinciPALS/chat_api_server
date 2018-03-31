@@ -30,7 +30,7 @@ server.route({
 
 server.route({
   method: "GET",
-  path: "/topic/{id}",
+  path: "/api/v1/topic/{id}",
   handler: require("./controllers/api/v1/topic").show,
   options: {
     description: "Returns the topic that has the provided ID",
@@ -47,7 +47,7 @@ server.route({
 
 server.route({
   method: "POST",
-  path: "/topic",
+  path: "/api/v1/topic",
   handler: require("./controllers/api/v1/topic").create,
   options: {
     description: "Creates a new topic",
