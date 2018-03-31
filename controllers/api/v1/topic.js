@@ -44,4 +44,18 @@ module.exports = {
         resolve(h.response({statusCode: 500, error: "Internal server error"}).code(500));
       }
     });
+  },
+
+  update: function(req, h) {
+    return new Promise(async function(resolve) {
+      try {
+        dev = await new Topic({id: req.params.id}).save(req.payload);
+        resolve(h.response(JSON.parse(JSON.stringify(dev))).code(200))
+      } catch (err) {
+        resolve(h.response({statusCode: 500, error: "Internal server error"}).code(500));
+        console.log("err updating: " + err);
+      }
+    });
+  }
+
 }
