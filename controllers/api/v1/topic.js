@@ -1,4 +1,3 @@
-const Boom = require("boom");
 const Topic = require("../../../models/topic");
 
 module.exports = {
