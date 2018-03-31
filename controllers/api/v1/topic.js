@@ -28,5 +28,20 @@ module.exports = {
         resolve(h.response({statusCode: 404, error: "Not Found", message: "Topic not found"}).code(404));
       }
     });
-  }
+  },
+
+  /**
+   * Creates a topic with the provided parameters
+   */
+  create: function(req, h) {
+    return new Promise(async function(resolve) {
+      try {
+        dev = new Topic(req.payload);
+        newTopic = await dev.save();
+        resolve(h.response(JSON.parse(JSON.stringify(newTopic))).code(201));
+      } catch (err) {
+        console.log("error creating topic " + err);
+        resolve(h.response({statusCode: 500, error: "Internal server error"}).code(500));
+      }
+    });
 }
