@@ -1,6 +1,6 @@
 exports.plugin = {
   register: (server, options) => {
-              for (var route in require("./" + options.path) {
+              for (var route in require("./" + options.path + ".js") {
                 server.register(route);
               }
             },
