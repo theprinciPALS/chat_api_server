@@ -9,7 +9,7 @@ module.exports = {
         .string()
         .min(1)
         .max(50),
-  creatorEamil: Joi
+  creatorEmail: Joi
       .string()
       .min(1)
       .max(100),
