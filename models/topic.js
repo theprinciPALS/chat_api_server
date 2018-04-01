@@ -3,6 +3,7 @@ const Joi = require("joi");
 
 module.exports = bookshelf.Model.extend({
   tableName: "topics",
+  hasTimestamps: true,
 
   schema: {
     create: Joi.object().keys(require("../schemas/api/v1/topics/create")),
