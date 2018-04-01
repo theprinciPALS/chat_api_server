@@ -8,8 +8,11 @@ module.exports = {
     return new Promise(async function(resolve){
       try {
         topics = await Topic.fetchAll();
-        resolve(h.response(JSON.parse("{topics: " + JSON.stringify(topics))).code(200) + "}");
+        resolve(h.response({
+          topics: topics
+        }).code(200));
       } catch (err) {
+        throw err;
         resolve(h.response({error: err}).code(500));
       }
     });
@@ -89,7 +92,9 @@ module.exports = {
                   }
                 }).fetch();
         if(result !== null) {
-          resolve(h.response("{topics: " + JSON.parse(JSON.stringify(result)) + "}").code(200));
+          resolve(h.response({
+            topics: result
+          }).code(200));
         } else {
           resolve(h.response({"statusCode":404,"error":"Not Found","message":"Topic not found"}).code(404));
         }
