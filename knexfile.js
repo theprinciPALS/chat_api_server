@@ -6,7 +6,7 @@ module.exports = {
       host: "192.168.2.102",
       user: "postgres",
       password: "postgres",
-      database: "pa_controller_backend_dev",
+      database: "chat_api_server_dev",
       port: 5432
     },
     migrations: {
@@ -20,7 +20,7 @@ module.exports = {
       host: "192.168.2.102",
       user: "postgres",
       password: "postgres",
-      database: "pa_controller_backend_test",
+      database: "chat_api_server_dev",
       port: 5432
     },
     migrations: {
