@@ -7,16 +7,12 @@ const server=Hapi.server({
 });
 
 async function registerRoutes() {
-  try {
     await server.register({
-      plugin: require("./routes/config"),
+      plugin: require("./routes/config.js"),
       options: {
         path: "api/v1/topic"
       }
     });
-  } catch (err) {
-    console.log("Plugin error is " + err);
-  }
 }
 
 // Add the route
@@ -31,6 +27,8 @@ server.route({
 // Start the server
 async function start() {
 
+
+  await(registerRoutes());
     try {
         await server.start();
     }
@@ -40,6 +38,7 @@ async function start() {
     }
 
     console.log('Server running at:', server.info.uri);
+    console.log(server.table());
 };
 
 start();

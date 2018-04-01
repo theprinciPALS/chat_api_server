@@ -1,18 +1,12 @@
 module.exports = {
-  method: "DELETE",
-  path: "/api/v1/topic/{id}",
-  handler: require("./controllers/api/v1/topic").delete,
+  method: "GET",
+  path: "/topic/{param}/{val}",
+  handler: require("../../../../controllers/api/v1/topic").find,
   options: {
-    description: "Deletes the topic with the provided ID",
-    tags: ["api", "authenticated"],
+    description: "Finds the topic(s) with the that have the provided value for the provided parameter",
+    tags: ["api"],
     validate: {
-      params: {
-        id: Joi
-            .number()
-            .integer()
-            .required()
-            .description("ID of the topic to delete")
-      }
+      params: require("../../../../schemas/api/v1/topics/find")
     },
     cors: {
       origin: "ignore"

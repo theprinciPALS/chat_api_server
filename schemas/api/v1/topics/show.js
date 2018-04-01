@@ -5,5 +5,5 @@ module.exports = {
       .number()
       .integer()
       .required()
-      .description("ID of the topic to find")
+      .description("ID of the topic")
 }

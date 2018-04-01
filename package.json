@@ -4,6 +4,7 @@
   "description": "PrinciPALS CBus Hack API server. Handles authentication and CRUD",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -22,8 +23,10 @@
   "homepage": "https://github.com/theprincipals/chat_api_server#readme",
   "dependencies": {
     "bookshelf": "^0.13.3",
+    "bookshelf-joi-validator": "^0.2.4",
     "chai": "^4.1.2",
     "hapi": "^17.2.3",
+    "hapi-routes": "^5.0.0",
     "joi": "^13.1.2",
     "knex": "^0.14.4",
     "lab": "^15.4.1",
