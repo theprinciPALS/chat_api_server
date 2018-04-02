@@ -7,6 +7,7 @@ module.exports = {
     tags: ["api"],
     cors: {
       origin: "ignore"
-    }
+    },
+    auth: "default"
   }
 };

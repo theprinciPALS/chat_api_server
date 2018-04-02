@@ -6,6 +6,9 @@ const server=Hapi.server({
     port:8000
 });
 
+server.auth.scheme("stupidName", require("./schemes/stupidName"));
+server.auth.strategy("default", "stupidName");
+
 async function registerRoutes() {
     await server.register({
       plugin: require("./routes/config.js"),
