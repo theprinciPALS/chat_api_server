@@ -15,6 +15,9 @@ module.exports = {
       .max(100),
 
   underReview: Joi
-      .boolean()
+      .boolean(),
+
+  updated_at: Joi.any(),
+  created_at: Joi.any()
 
 }
