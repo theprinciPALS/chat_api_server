@@ -10,10 +10,9 @@ const lab = exports.lab = Lab.script();
 const chai = require("chai");
 const expect = chai.expect;
 const sinon = require("sinon");
-require("sinon-as-promised");
 const Topic = require("../../../../models/topic");
 
-lab.experiment("GET /topic", () => {
+lab.experiment("GET /api/v1/topic", () => {
   lab.beforeEach(() => {
     sandbox = sinon.sandbox.create();
   });
@@ -24,7 +23,7 @@ lab.experiment("GET /topic", () => {
 
   lab.test("returns a 200 OK", async () => {
     res = await server.inject({
-      url: "/topic",
+      url: "/api/v1/topic",
       method: "GET"
     });
     expect(res.statusCode).to.equal(200);
@@ -43,20 +42,20 @@ lab.experiment("GET /topic", () => {
       underReview: false
     })]);
     res = await server.inject({
-      url: "/topic",
+      url: "/api/v1/topic",
       method: "GET"
     });
     expect(res.result).to.deep.equal({
       topics: [
         {
           "id": 0,
-          "name": "Ryan is Awesome",
+          "name": "Ryan Is Awesome",
           "creatorEmail": "abc@example.com",
           "underReview": true
         },
         {
           "id": 1,
-          "name": "Joe is Awesome",
+          "name": "Joe Is Awesome",
           "creatorEmail": "joe@example.com",
           underReview: false
         }
@@ -65,7 +64,7 @@ lab.experiment("GET /topic", () => {
   });
 });
 
-lab.experiment("GET /topic/:id", async () => {
+lab.experiment("GET /api/v1/topic/:id", async () => {
   lab.beforeEach(() => {
     sandbox = sinon.sandbox.create();
   });
@@ -80,9 +79,9 @@ lab.experiment("GET /topic/:id", async () => {
       name: "Ryan Is Awesome",
       creatorEmail: "abc@example.com",
       underReview: true
-    });
+    }));
     res = await server.inject({
-      url: "/topic/1",
+      url: "/api/v1/topic/1",
       method: "GET"
     });
     expect(res.statusCode).to.equal(302);
@@ -94,9 +93,9 @@ lab.experiment("GET /topic/:id", async () => {
       name: "Ryan Is Awesome",
       creatorEmail: "abc@example.com",
       underReview: true
-    });
+    }));
     res = await server.inject({
-      url: "/topic/0",
+      url: "/api/v1/topic/0",
       method: "GET"
     });
     console.log(JSON.stringify("result is " + res.result));
@@ -111,7 +110,7 @@ lab.experiment("GET /topic/:id", async () => {
   lab.test("returns 404 not found if the deivce does not exist", async () => {
     sandbox.stub(Topic.prototype, "fetch").rejects(new Error("Not found"));
     res = await server.inject({
-      url: "/topic/100",
+      url: "/api/v1/topic/100",
       method: "GET"
     });
     expect(res.statusCode).to.equal(404);
@@ -120,7 +119,7 @@ lab.experiment("GET /topic/:id", async () => {
   lab.test("returns an error if the topic does not exist", async () => {
     sandbox.stub(Topic.prototype, "fetch").rejects(new Error("Not found"));
     res = await server.inject({
-      url: "/topic/100",
+      url: "/api/v1/topic/100",
       method: "GET"
     });
     // The only important line is the message, but we check everything

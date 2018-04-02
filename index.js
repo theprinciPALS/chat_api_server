@@ -42,3 +42,5 @@ async function start() {
 };
 
 start();
+
+module.exports = server;
