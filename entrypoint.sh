@@ -4,5 +4,4 @@ npm install -g knex
 knex migrate:latest --env=production
 >&2 echo "Migrated database..."
 knex seed:run --env=production
->&2 echo "Seeded database..."
 NODE_ENV=production npm start
