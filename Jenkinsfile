@@ -8,9 +8,9 @@ pipeline {
         sh 'npm test'
       }
     }
-    if(env.BRANCH_NAME == 'master') {
-      stage('Build') {
-        steps {
+    stage('Build') {
+      steps {
+        if(env.BRANCH_NAME == 'master') {
           echo 'Docker building!'
           sh 'docker build .'
           sh 'docker push principals/jenkinsdemo'
