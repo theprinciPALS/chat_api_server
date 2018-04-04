@@ -10,10 +10,12 @@ pipeline {
     }
     stage('Build') {
       steps {
-        if(env.BRANCH_NAME == 'master') {
-          echo 'Docker building!'
-          sh 'docker build .'
-          sh 'docker push principals/jenkinsdemo'
+        script {
+          if(env.BRANCH_NAME == 'master') {
+            echo 'Docker building!'
+            sh 'docker build .'
+            sh 'docker push principals/jenkinsdemo'
+          }
         }
       }
     }
