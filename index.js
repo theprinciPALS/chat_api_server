@@ -41,7 +41,6 @@ async function start() {
     }
 
     console.log('Server running at:', server.info.uri);
-    console.log(server.table());
 };
 
 start();
