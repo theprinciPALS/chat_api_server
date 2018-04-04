@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "lab -I __core-js_shared__,sandbox"
+    "test": "lab -I __core-js_shared__,sandbox,topics,res,topic"
   },
   "repository": {
     "type": "git",
