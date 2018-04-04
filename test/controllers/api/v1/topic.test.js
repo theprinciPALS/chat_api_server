@@ -45,22 +45,22 @@ lab.experiment("GET /api/v1/topic", () => {
       url: "/api/v1/topic",
       method: "GET"
     });
-    expect(res.result).to.deep.equal({
+    expect(JSON.stringify(res.result)).to.equal(JSON.stringify({
       topics: [
         {
-          "id": 0,
-          "name": "Ryan Is Awesome",
-          "creatorEmail": "abc@example.com",
-          "underReview": true
+          id: 0,
+          name: "Ryan Is Awesome",
+          creatorEmail: "abc@example.com",
+          underReview: true
         },
         {
-          "id": 1,
-          "name": "Joe Is Awesome",
-          "creatorEmail": "joe@example.com",
+          id: 1,
+          name: "Joe Is Awesome",
+          creatorEmail: "joe@example.com",
           underReview: false
         }
       ]
-    });
+    }));
   });
 });
 
