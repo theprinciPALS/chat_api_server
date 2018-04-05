@@ -1,10 +1,11 @@
 {
   "name": "chat_api_server",
   "version": "1.0.0",
-  "description": "PrinciPALS CBus Hack API server. Handles authentication and CRUD.",
+  "description": "PrinciPALS CBus Hack API server. Handles authentication and CRUD",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "test": "lab -I __core-js_shared__,sandbox,topics,res,topic"
   },
   "repository": {
     "type": "git",
@@ -21,7 +22,18 @@
   },
   "homepage": "https://github.com/theprincipals/chat_api_server#readme",
   "dependencies": {
+    "bookshelf": "^0.13.3",
+    "bookshelf-joi-validator": "^0.2.4",
+    "chai": "^4.1.2",
     "hapi": "^17.2.3",
-    "npm": "^5.8.0"
+    "hapi-routes": "^5.0.0",
+    "joi": "^13.1.2",
+    "knex": "^0.14.4",
+    "lab": "^15.4.1",
+    "npm": "^5.8.0",
+    "pg": "^7.4.1",
+    "sinon": "^4.5.0",
+    "sinon-as-promised": "^4.0.3",
+    "sqlite3": "^4.0.0"
   }
 }
