@@ -13,7 +13,7 @@ pipeline {
         script {
           if(env.BRANCH_NAME == 'master') {
             echo 'Docker building!'
-            sh 'docker build .'
+            sh 'docker build . -t principals/chat_api_server'
             sh 'docker push principals/chat_api_server'
           }
         }
