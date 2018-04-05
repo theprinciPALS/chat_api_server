@@ -14,7 +14,7 @@ pipeline {
           if(env.BRANCH_NAME == 'master') {
             echo 'Docker building!'
             sh 'docker build .'
-            sh 'docker push principals/jenkinsdemo'
+            sh 'docker push principals/chat_api_server'
           }
         }
       }
