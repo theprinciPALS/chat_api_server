@@ -1,5 +1,5 @@
 const Hapi=require('hapi');
-const exec = require('child_process').exec;
+const git = require('git-rev-sync');
 
 // Create a server with a host and port
 const server=Hapi.server({
@@ -22,15 +22,13 @@ async function registerRoutes() {
 async function registerSentry() {
   // This will get the SHA1 of out latest release
   // We provide this to sentry se we can track errors by release
-  await exec('git rev-parse HEAD', async function(err, stdout, stderr) {
-    await server.register({
-      plugin: require("./helpers/raven/config.js"),
-      options: {
-        dsn: process.env.SENTRY_DSN,
-        id: process.env.SENTRY_ID,
-        release: stdout
-      }
-    });
+  await server.register({
+    plugin: require("./helpers/raven/config.js"),
+    options: {
+      dsn: process.env.SENTRY_DSN,
+      id: process.env.SENTRY_ID,
+      release: git.long()
+    }
   });
 }
 
