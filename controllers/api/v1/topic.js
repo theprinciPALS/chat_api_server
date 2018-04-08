@@ -12,7 +12,7 @@ module.exports = {
           topics: topics
         }).code(200));
       } catch (err) {
-        req.server.Raven.captureException(err);
+        req.server.plugins.raven.raven.captureException(err);
         resolve(h.response({error: err}).code(500));
       }
     });
@@ -22,13 +22,13 @@ module.exports = {
    * Returns the topic with the provided ID
    */
   show: function(req, h) {
-    return new Promise(async function(resolve, reject){
+    return new Promise(async function(resolve){
       try {
         topic = await new Topic({id: req.params.id}).fetch();
         console.log("topic is " + topic);
         resolve(h.response(JSON.parse(JSON.stringify(topic))).code(302));
       } catch (err) {
-        req.server.Raven.captureException(err);
+        req.server.plugins.raven.raven.captureException(err);
         resolve(h.response({statusCode: 404, error: "Not Found", message: "Topic not found"}).code(404));
       }
     });
@@ -44,7 +44,7 @@ module.exports = {
         newTopic = await dev.save();
         resolve(h.response(JSON.parse(JSON.stringify(newTopic))).code(201));
       } catch (err) {
-        req.server.Raven.captureException(err);
+        req.server.plugins.raven.raven.captureException(err);
         resolve(h.response({statusCode: 500, error: "Internal server error"}).code(500));
       }
     });
@@ -58,7 +58,7 @@ module.exports = {
         dev = await new Topic({id: req.params.id}).save(req.payload);
         resolve(h.response(JSON.parse(JSON.stringify(dev))).code(200))
       } catch (err) {
-        req.server.Raven.captureException(err);
+        req.server.plugins.raven.raven.captureException(err);
         resolve(h.response({statusCode: 500, error: "Internal server error"}).code(500));
       }
     });
@@ -73,7 +73,7 @@ module.exports = {
         dev = await new Topic({id: req.params.id}).destroy();
         resolve(h.response(JSON.parse(JSON.stringify(dev))).code(204));
       } catch (err) {
-        req.server.Raven.captureException(err);
+        req.server.plugins.raven.raven.captureException(err);
         resolve(h.response({statusCode: 404, error: "Not Found", message: "Topic not found"}).code(404));
       }
     });
@@ -101,7 +101,7 @@ module.exports = {
           resolve(h.response({"statusCode":404,"error":"Not Found","message":"Topic not found"}).code(404));
         }
       } catch (err) {
-        req.server.Raven.captureException(err);
+        req.server.plugins.raven.raven.captureException(err);
         resolve(h.response({statusCode: 500, error: "Internal server error121"}).code(500));
       }
     });
