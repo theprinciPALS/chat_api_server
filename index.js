@@ -8,7 +8,8 @@ const server=Hapi.server({
 });
 
 server.auth.scheme("stupidName", require("./schemes/stupidName"));
-server.auth.strategy("default", "stupidName");
+server.auth.scheme("session", require("./schemes/session"));
+server.auth.strategy("default", "session");
 
 async function registerRoutes() {
     await server.register({
