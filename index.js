@@ -14,7 +14,7 @@ async function registerRoutes() {
     await server.register({
       plugin: require("./routes/config.js"),
       options: {
-        path: "api/v1/topic"
+        paths: ["api/v1/topic", "api/v1/session"]
       }
     });
 }
