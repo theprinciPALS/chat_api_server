@@ -33,6 +33,15 @@ async function registerSentry() {
   });
 }
 
+async function registerSockets() {
+  await server.register({
+    plugin: require("./sockets/config.js"),
+    options: {
+
+    }
+  });
+}
+
 // Add the route
 server.route({
     method:'GET',
@@ -48,6 +57,7 @@ async function start() {
 
   await(registerRoutes());
   await(registerSentry());
+  await(registerSockets());
     try {
         await server.start();
     }

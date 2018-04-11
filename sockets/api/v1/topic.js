@@ -23,12 +23,12 @@ class TopicSocket {
    * }
    */
   constructor(server) {
-    const _this = this;
-    this.io = require("socket.io")(server.listener);
+    this.io = require("socket.io")(server.listener, {origins: "*:*"});
     this.io.on("connection", (socket) => {
       socket.join(socket.handshake.query.topicID);
       socket.topicID = socket.handshake.query.topicID;
-      subscriber.on("message", this.onMessageFromRedis);
+      subscriber.on("message", (channel, message) => this.onMessageFromRedis(channel, message));
+      subscriber.subscribe("messages");
       this.handleConnection(socket);
     });
   }
@@ -51,25 +51,19 @@ class TopicSocket {
     socket.on("message", (data) => this.propagateMessage(socket.topicID, data));
   }
 
-  /*
-   * This is what we do when we get a message from redis and need to deliver it
-   */
-  sendMessage(id, data) {
-    this.io.to(id).emit(data);
-  }
-
   onMessageFromRedis(channel, message) {
-    parsed = JSON.parse(message);
-    id = message.id;
-    data = message.data;
-    this.sendMessage(id, data);
+    console.log("message from redis is " + message);
+    var parsed = JSON.parse(message);
+    var id = parsed.id;
+    var data = parsed.data;
+    this.io.to(id).emit("message", data);
   }
 
   /*
    * This is how we send a message to redis
    */
   propagateMessage(id, data) {
-    body = {
+    var body = {
       id: id,
       data: data
     };
