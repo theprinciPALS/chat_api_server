@@ -1,4 +1,5 @@
 const Topic = require("../../../models/topic");
+const sessionValidator = require("../../../helpers/auth/sessionValidator");
 const redis = require("redis");
 
 const redisURL = 'redis://' + process.env.REDIS_USER + ':' + process.env.REDIS_PASSWORD + '@' + process.env.REDIS_HOST + ':' + process.env.REDIS_PORT
@@ -24,12 +25,10 @@ class TopicSocket {
    */
   constructor(server) {
     this.io = require("socket.io")(server.listener, {origins: "*:*"});
+    subscriber.on("message", (channel, message) => this.onMessageFromRedis(channel, message));
+    subscriber.subscribe("messages");
     this.io.on("connection", (socket) => {
-      socket.join(socket.handshake.query.topicID);
-      socket.topicID = socket.handshake.query.topicID;
-      subscriber.on("message", (channel, message) => this.onMessageFromRedis(channel, message));
-      subscriber.subscribe("messages");
-      this.handleConnection(socket);
+      this.authenticateSocket(socket);
     });
   }
   /**
@@ -68,6 +67,24 @@ class TopicSocket {
       data: data
     };
     publisher.publish("messages", JSON.stringify(body));
+  }
+
+  authenticateSocket(socket) {
+    const session = socket.handshake.query.session;
+    const salt = socket.handshake.query.salt;
+    const topicID = socket.handshake.query.topicID;
+    sessionValidator.validate(session, salt).then((success) => {
+      if(success) {
+        console.log("authenticated session");
+        socket.join(topicID);
+        socket.topicID = topicID;
+        this.handleConnection(socket);
+      } else {
+        console.log("unauthenticated session");
+        socket.join(session);
+        this.propagateMessage(session, "invalid");
+      }
+    })
   }
 }
 

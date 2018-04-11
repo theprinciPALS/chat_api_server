@@ -7,7 +7,7 @@
   <body>
     <h1>Socket.IO Testing</h1>
     <script>
-      var socket = io("http://localhost:8000", {query: "topicID=1"});
+      var socket = io("http://localhost:8000", {query: "topicID=1&session=2bc0e2c3-d495-4b9e-97d2-880238322b96&salt=$2a$10$gBnC113pW.xdhtrmD87XHO"});
       socket.on("connect", function() {
         console.log("connected");
       });
