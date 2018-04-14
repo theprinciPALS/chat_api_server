@@ -11,7 +11,6 @@ module.exports = {
     },
     cors: {
       origin: "ignore"
-    },
-    auth: "default"
+    }
   }
 };
