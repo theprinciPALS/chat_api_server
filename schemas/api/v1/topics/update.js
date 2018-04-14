@@ -9,10 +9,8 @@ module.exports = {
         .string()
         .min(1)
         .max(50),
-  creatorEmail: Joi
-      .string()
-      .min(1)
-      .max(100),
+  image: Joi
+      .string(),
 
   underReview: Joi
       .boolean(),
