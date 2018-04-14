@@ -24,6 +24,7 @@ class TopicSocket {
    * }
    */
   constructor(server) {
+    this.server = server;
     this.io = require("socket.io")(server.listener, {origins: "*:*"});
     subscriber.on("message", (channel, message) => this.onMessageFromRedis(channel, message));
     subscriber.subscribe("messages");
@@ -84,7 +85,9 @@ class TopicSocket {
         socket.join(session);
         this.propagateMessage(session, "invalid");
       }
-    })
+    }).catch((err) => {
+      server.plugins.raven.raven.captureException(err);
+    });
   }
 }
 
